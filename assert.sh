@@ -246,3 +246,15 @@ assert_le() {
     return 1
   fi
 }
+
+assert_file_exist() {
+  local file="$1"
+  local msg="${2-}"
+
+  if [ -f "$file" ]; then
+    return 0
+  else
+    [ "${#msg}" -gt 0 ] && log_failure "$msg" || true
+    return 1
+  fi
+}
