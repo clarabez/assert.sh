@@ -469,6 +469,23 @@ test_assert_le() {
   fi
 }
 
+test_assert_file_exist()  {
+  log_header "Test :: assert_file_exist"
+
+  assert_file_exist "/etc/resolv.conf"
+  if [ "$?" == 0 ]; then
+    log_success "assert_file_exist returns 0 if file exists"
+  else
+    log_failure "assert_file_exist should return 0"
+  fi
+
+  assert_file_exist "/etc/resolv_test.conf"
+  if [ "$?" == 1 ]; then
+    log_success "assert_file_exist returns 1 if files does not exist"
+  else
+    log_failure "assert_file_exist should return 1"
+  fi
+}
 
 
 # test calls
@@ -487,4 +504,5 @@ test_assert_gt
 test_assert_ge
 test_assert_lt
 test_assert_le
+test_assert_file_exist
 
